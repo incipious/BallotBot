@@ -3,9 +3,9 @@ from discord.ext import commands
 from pymongo import MongoClient
 import os
 
-cluster = MongoClient('mongoclient_key')
-db = cluster["EasyBallot"]
-vote_db = db["Votes"]
+cluster = MongoClient('mongoclient_key') # Insert your MongoClient key.
+db = cluster["EasyBallot"] # Insert database name.
+vote_db = db["Votes"] # Insert collection name.
 
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix = 'ez!', intents=intents)
@@ -15,10 +15,12 @@ client = commands.Bot(command_prefix = 'ez!', intents=intents)
 async def on_ready():
     print('Activated!')
 
+# A regular ping command to test API latency.
 @client.command()
 async def ping(ctx):
     await ctx.send(f'**Returned at:** {round(client.latency * 1000)}ms')
 
+# Clears the DB
 @client.command()
 @commands.is_owner()
 async def cleardb(ctx):
